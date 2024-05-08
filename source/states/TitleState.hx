@@ -141,7 +141,7 @@ class TitleState extends MusicBeatState
 				FlxG.fullscreen = FlxG.save.data.fullscreen;
 				//trace('LOADED FULLSCREEN SETTING!!');
 			}
-			persistentUpdate = true;
+			persistentUpdate = false;
 			persistentDraw = true;
 			MobileData.init();
 		}
@@ -187,7 +187,7 @@ class TitleState extends MusicBeatState
 		if (!initialized && FlxG.sound.music == null)
 			FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
 
-		Conductor.bpm = titleJSON.bpm;
+		Conductor.bpm = 130;
 		persistentUpdate = true;
 
 		var bg:FlxSprite = new FlxSprite();
@@ -546,16 +546,18 @@ class TitleState extends MusicBeatState
 					FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
 					FlxG.sound.music.fadeIn(4, 0, 0.7);
 				case 2:
-					createCoolText(['Psych Engine by'], 40);
+					createCoolText(['FNF VS FNAF by'], 40);
 				case 4:
-					addMoreText('Shadow Mario', 40);
-					addMoreText('Riveren', 40);
+					addMoreText('Pouria SFMs', 40);
+					addMoreText('And', 40);
+					addMoreText('Penove', 40);
+					addMoreText('Presents', 40);
 				case 5:
 					deleteCoolText();
 				case 6:
 					createCoolText(['Not associated', 'with'], -40);
 				case 8:
-					addMoreText('newgrounds', -40);
+					addMoreText('Scott Cowton', -40);
 					ngSpr.visible = true;
 				case 9:
 					deleteCoolText();
@@ -567,11 +569,11 @@ class TitleState extends MusicBeatState
 				case 13:
 					deleteCoolText();
 				case 14:
-					addMoreText('Friday');
+					addMoreText('FNF');
 				case 15:
-					addMoreText('Night');
+					addMoreText('VS');
 				case 16:
-					addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
+					addMoreText('FNAF'); // credTextShit.text += '\nFunkin';
 
 				case 17:
 					skipIntro();
