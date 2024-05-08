@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=PsychEngine
+Comment=A mobile port of Friday Night Funkin' Psych Engine
+Icon=io.github.mobileporting.fnf-psychengine-mobile
+Exec=PsychEngine
+Categories=Game
