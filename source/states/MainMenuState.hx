@@ -27,12 +27,13 @@ class MainMenuState extends MusicBeatState
 	var optionShit:Array<String> = [
 		'story_mode',
 		'freeplay',
-		#if MODS_ALLOWED 'mods', #end
-		'credits'
+		//#if MODS_ALLOWED 'mods', #end
+		'credits',
+		'options'
 	];
 
-	var leftOption:String = #if ACHIEVEMENTS_ALLOWED 'achievements' #else null #end;
-	var rightOption:String = 'options';
+	var leftOption:String = 'nothing';
+	var rightOption:String = 'nothing';
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
@@ -54,14 +55,17 @@ class MainMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
-		var yScroll:Float = 0.25;
+		var yScroll:Float = 0;
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
+		bg.frames = Paths.getSparrowAtlas('menuBG');
+		bg.animation.addByPrefix('play', 'idle', 24, true);
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		bg.scrollFactor.set(0, yScroll);
 		bg.setGraphicSize(Std.int(bg.width * 1.175));
 		bg.updateHitbox();
 		bg.screenCenter();
 		add(bg);
+		bg.animation.play('play');
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
@@ -79,21 +83,100 @@ class MainMenuState extends MusicBeatState
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
-		for (num => option in optionShit)
-		{
-			var item:FlxSprite = createMenuItem(option, 0, (num * 140) + 90);
-			item.y += (4 - optionShit.length) * 70; // Offsets for when you have anything other than 4 items
-			item.screenCenter(X);
-		}
+		
+	    //storymode
+                var menuItem:FlxSprite = new FlxSprite(50, 300);
+		menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[0]);
+		menuItem.animation.addByPrefix('idle', optionShit[0] + ' idle', 24, true);
+		menuItem.animation.addByPrefix('selected', optionShit[0] + ' selected', 24, true);
+		menuItem.animation.play('idle');
+		menuItem.updateHitbox();
+		
+		menuItem.antialiasing = ClientPrefs.data.antialiasing;
+		menuItem.scrollFactor.set();
+		menuItems.add(menuItem);
+		
+            //freeplay
+		var menuItem:FlxSprite = new FlxSprite(50, 400);
+		menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[1]);
+		menuItem.animation.addByPrefix('idle', optionShit[1] + ' idle', 24, true);
+		menuItem.animation.addByPrefix('selected', optionShit[1] + ' selected', 24, true);
+		menuItem.animation.play('idle');
+		menuItem.updateHitbox();
+		
+		menuItem.antialiasing = ClientPrefs.data.antialiasing;
+		menuItem.scrollFactor.set();
+		menuItems.add(menuItem);
+		
+            //credits
+		var menuItem:FlxSprite = new FlxSprite(50, 500);
+		menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[2]);
+		menuItem.animation.addByPrefix('idle', optionShit[2] + ' idle', 24, true);
+		menuItem.animation.addByPrefix('selected', optionShit[2] + ' selected', 24, true);
+		menuItem.animation.play('idle');
+		menuItem.updateHitbox();
+		
+		menuItem.antialiasing = ClientPrefs.data.antialiasing;
+		menuItem.scrollFactor.set();
+		menuItems.add(menuItem);
+		
+            //options
+		var menuItem:FlxSprite = new FlxSprite(50, 600);
+		menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[3]);
+		menuItem.animation.addByPrefix('idle', optionShit[3] + ' idle', 24, true);
+		menuItem.animation.addByPrefix('selected', optionShit[3] + ' selected', 24, true);
+		menuItem.animation.play('idle');
+		menuItem.updateHitbox();
+		
+		menuItem.antialiasing = ClientPrefs.data.antialiasing;
+		menuItem.scrollFactor.set();
+		menuItems.add(menuItem);
+		
+		
+		var char1:FlxSprite = new FlxSprite(0, 0);
+		char1.frames = Paths.getSparrowAtlas('freddymenu');
+		char1.animation.addByPrefix('play', 'idle', 24, true);
+		char1.antialiasing = ClientPrefs.data.antialiasing;
+		char1.flipX = true;
+		char1.scrollFactor.set(0, yScroll);
+		char1.setGraphicSize(Std.int(char1.width * 1));
+		add(char1);
+		char1.animation.play('play');
 
-		if (leftOption != null)
-			leftItem = createMenuItem(leftOption, 60, 490);
-		if (rightOption != null)
-		{
-			rightItem = createMenuItem(rightOption, FlxG.width - 60, 490);
-			rightItem.x -= rightItem.width;
-		}
+		var char2:FlxSprite = new FlxSprite(0, 0);
+		char2.frames = Paths.getSparrowAtlas('bonniemenu');
+		char2.animation.addByPrefix('play', 'idle', 24, true);
+		char2.antialiasing = ClientPrefs.data.antialiasing;
+		char2.flipX = true;
+		char2.visible = false;
+		char2.scrollFactor.set(0, yScroll);
+		char2.setGraphicSize(Std.int(char1.width * 1));
+		add(char2);
+		char2.animation.play('play');
 
+		var char3:FlxSprite = new FlxSprite(0, 0);
+		char3.frames = Paths.getSparrowAtlas('chicamenu');
+		char3.animation.addByPrefix('play', 'idle', 24, true);
+		char3.antialiasing = ClientPrefs.data.antialiasing;
+		char3.flipX = true;
+		char3.visible = false;
+		char3.scrollFactor.set(0, yScroll);
+		char3.setGraphicSize(Std.int(char1.width * 1));
+		add(char3);
+		char3.animation.play('play');
+
+		var char4:FlxSprite = new FlxSprite(0, 0);
+		char4.frames = Paths.getSparrowAtlas('bonniemenu');
+		char4.animation.addByPrefix('play', 'idle', 24, true);
+		char4.antialiasing = ClientPrefs.data.antialiasing;
+		char4.flipX = true;
+		char4.visible = false;
+		char4.scrollFactor.set(0, yScroll);
+		char4.setGraphicSize(Std.int(char1.width * 1));
+		add(char4);
+		char4.animation.play('play');
+
+		
 		var psychVer:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
 		psychVer.scrollFactor.set();
 		psychVer.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -115,26 +198,11 @@ class MainMenuState extends MusicBeatState
 		#end
 		#end
 
-		addVirtualPad('LEFT_FULL', 'MAIN_MENU');
+		addVirtualPad('NONE', 'NONE');
 
 		super.create();
 
 		FlxG.camera.follow(camFollow, null, 9);
-	}
-
-	function createMenuItem(name:String, x:Float, y:Float):FlxSprite
-	{
-		var menuItem:FlxSprite = new FlxSprite(x, y);
-		menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_$name');
-		menuItem.animation.addByPrefix('idle', '$name idle', 24, true);
-		menuItem.animation.addByPrefix('selected', '$name selected', 24, true);
-		menuItem.animation.play('idle');
-		menuItem.updateHitbox();
-		
-		menuItem.antialiasing = ClientPrefs.data.antialiasing;
-		menuItem.scrollFactor.set();
-		menuItems.add(menuItem);
-		return menuItem;
 	}
 
 	var selectedSomethin:Bool = false;
@@ -262,9 +330,7 @@ class MainMenuState extends MusicBeatState
 					selectedSomethin = true;
 					FlxG.mouse.visible = false;
 
-					if (ClientPrefs.data.flashing)
-						FlxFlicker.flicker(magenta, 1.1, 0.15, false);
-
+	
 					var item:FlxSprite;
 					var option:String;
 					switch(curColumn)
