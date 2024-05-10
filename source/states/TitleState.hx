@@ -547,10 +547,11 @@ class TitleState extends MusicBeatState
 					FlxG.sound.music.fadeIn(4, 0, 0.7);
 				case 2:
 					createCoolText(['FNF VS FNAF by'], 40);
-				case 4:
+				case 3:
 					addMoreText('Pouria SFMs', 40);
 					addMoreText('And', 40);
 					addMoreText('Penove', 40);
+				case 4:
 					addMoreText('Presents', 40);
 				case 5:
 					deleteCoolText();
@@ -574,8 +575,12 @@ class TitleState extends MusicBeatState
 					addMoreText('VS');
 				case 16:
 					addMoreText('FNAF'); // credTextShit.text += '\nFunkin';
-
 				case 17:
+					deleteCoolText();
+                                        addMoreText('FNF');
+					addMoreText('VS');
+					addMoreText('FNAF 1');
+				case 18:
 					skipIntro();
 			}
 		}
